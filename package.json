@@ -1,0 +1,29 @@
+{
+  "name": "how-to-use-redis",
+  "version": "1.0.0",
+  "description": "This project is built to implement redis and crypto nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/binar-exercise-fsw23/how-to-use-redis.git"
+  },
+  "keywords": [
+    "nodejs",
+    "redis",
+    "express"
+  ],
+  "author": "Septian Maulana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/binar-exercise-fsw23/how-to-use-redis/issues"
+  },
+  "homepage": "https://gitlab.com/binar-exercise-fsw23/how-to-use-redis#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "redis": "^4.2.0"
+  }
+}
