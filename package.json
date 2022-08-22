@@ -14,7 +14,12 @@
   "keywords": [
     "nodejs",
     "redis",
-    "express"
+    "express",
+    "cors",
+    "mongodb",
+    "redis",
+    "jwt",
+    "validator"
   ],
   "author": "Septian Maulana",
   "license": "MIT",
@@ -25,11 +30,15 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.2",
+    "mongoose-delete": "^0.5.4",
     "morgan": "^1.10.0",
-    "redis": "^4.2.0"
+    "redis": "^4.2.0",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

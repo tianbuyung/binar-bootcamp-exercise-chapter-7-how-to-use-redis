@@ -1,41 +1,44 @@
-require("dotenv").config();
 const express = require("express");
-const createError = require("http-errors");
-const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const { connectRedis } = require("./cache/redisCache");
+const cors = require("cors");
 const logger = require("morgan");
-const { connectRedis } = require("./models/redis");
+const cookieParser = require("cookie-parser");
 
-// App router
+const {
+  appPort,
+  appHost,
+  appProtocol,
+  databaseHost,
+  databasePort,
+  databaseName,
+} = require("./config");
+
+const corsOptions = {
+  origin: `${appProtocol}://${appHost}:${appPort}`,
+};
+
 const fishRouter = require("./routes/fishRouter");
+const authRouter = require("./routes/authRouter");
 
 const app = express();
-const appPort = process.env.APP_PORT || 3000;
-
+mongoose
+  .connect(`mongodb://${databaseHost}:${databasePort}/${databaseName}`)
+  .then(() => console.log(`MongoDB is running on port ${databasePort}`))
+  .catch((err) => {
+    console.log("Error in MongoDB connection : " + err);
+  });
 connectRedis();
 
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/", fishRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use("/auth", authRouter);
+app.use("/fish", fishRouter);
 
 app.listen(appPort, () => {
-  console.log(`App listening on port ${appPort}`);
+  console.log(`Server is running on port ${appPort}`);
 });

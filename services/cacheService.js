@@ -1,4 +1,4 @@
-const { client } = require("../repositories/redis");
+const { client } = require("../cache/redisCache");
 
 module.exports = {
   getCached: async (key) => {
